@@ -4,7 +4,6 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace bettingRouletteAPI.Model
 {
@@ -16,7 +15,6 @@ namespace bettingRouletteAPI.Model
         {
             var dbClient = new MongoClient(settings.ConnectionString);
             var database = dbClient.GetDatabase(settings.DatabaseName);
-
             _roulettesCollection = database.GetCollection<Roulette>(settings.RoulettesCollectionName);
         }
 
@@ -33,22 +31,13 @@ namespace bettingRouletteAPI.Model
         public Roulette CreateRoulette(Roulette roulette)
         {
             _roulettesCollection.InsertOne(roulette);
+
             return roulette;
         }
 
         public void UpdateRoulette(string id, Roulette roulette)
         {
             _roulettesCollection.ReplaceOne(roulette => roulette.Id == id, roulette);
-        }
-
-        public void DeleteRoulette(Roulette roulette)
-        {
-            _roulettesCollection.DeleteOne(roulette => roulette.Id == roulette.Id);
-        }
-
-        public void DeleteRouletteById(string id)
-        {
-            _roulettesCollection.DeleteOne(roulette => roulette.Id == id);
         }
     }
 }

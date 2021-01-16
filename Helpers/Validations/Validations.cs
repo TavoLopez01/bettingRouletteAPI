@@ -1,24 +1,18 @@
 ﻿using bettingRouletteAPI.Entities;
-using bettingRouletteAPI.Helpers.Configuration;
 using bettingRouletteAPI.Helpers.Results;
 using bettingRouletteAPI.Model;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace bettingRouletteAPI.Helpers.Validations
 {
     public class Validations
     {
-
         public string ValidateIfTokenExist(HttpRequest request, TokensModel tokensModel)
         {
             string response = "";
             string tokenString = "";
-
             foreach (var item in request.Headers)
             {
                 if (item.Key.Equals("Authorization"))
@@ -27,7 +21,6 @@ namespace bettingRouletteAPI.Helpers.Validations
                     break;
                 }
             }
-            
             if (tokenString != "") {
 
                 var token = tokensModel.GetTokenByStringToken(tokenString);
@@ -83,7 +76,6 @@ namespace bettingRouletteAPI.Helpers.Validations
                 resultValidationBet.Status = false;
                 resultValidationBet.Message = "Invalid amount";
             }
-
             if (amount > 10000)
             {
                 resultValidationBet.Status = false;
@@ -124,7 +116,6 @@ namespace bettingRouletteAPI.Helpers.Validations
             }
 
             return resultValidationBet;
-
         }
 
         public ResultValidationBet ValidateTypeBet(Bet bet)
@@ -170,8 +161,6 @@ namespace bettingRouletteAPI.Helpers.Validations
             }
 
             return resultValidationBet;
-
-
         }
     }
 }

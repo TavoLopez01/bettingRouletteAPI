@@ -1,11 +1,6 @@
 ﻿using bettingRouletteAPI.Helpers.Results;
 using bettingRouletteAPI.Model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace bettingRouletteAPI.Controllers
 {
@@ -14,7 +9,6 @@ namespace bettingRouletteAPI.Controllers
     public class OpenRouletteController : ControllerBase
     {
         private readonly RoulettesModel _rouletteModel;
-
         public OpenRouletteController(RoulettesModel rouleteModel)
         {
             _rouletteModel = rouleteModel;
