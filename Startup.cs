@@ -1,4 +1,5 @@
 using bettingRouletteAPI.Helpers.Configuration;
+using bettingRouletteAPI.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,9 @@ namespace bettingRouletteAPI
             // MongoDB Configuration
             services.Configure<RouletteDatabaseSettings>(Configuration.GetSection(nameof(RouletteDatabaseSettings)));
             services.AddSingleton<IRouletteDatabaseSettings>(sp => sp.GetRequiredService<IOptions<RouletteDatabaseSettings>>().Value);
+            services.AddSingleton<BetsModel>();
+            services.AddSingleton<RoulettesModel>();
+            services.AddSingleton<TokensModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

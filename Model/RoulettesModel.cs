@@ -10,43 +10,43 @@ namespace bettingRouletteAPI.Model
 {
     public class RoulettesModel
     {
-        private readonly IMongoCollection<Roulettes> _roulettesCollection;
+        private readonly IMongoCollection<Roulette> _roulettesCollection;
 
         public RoulettesModel(IRouletteDatabaseSettings settings)
         {
             var dbClient = new MongoClient(settings.ConnectionString);
             var database = dbClient.GetDatabase(settings.DatabaseName);
 
-            _roulettesCollection = database.GetCollection<Roulettes>(settings.RoulettesCollectionName);
+            _roulettesCollection = database.GetCollection<Roulette>(settings.RoulettesCollectionName);
         }
 
-        public List<Roulettes> Get()
+        public List<Roulette> GetRoulette()
         {
             return _roulettesCollection.Find(roulette => true).ToList();
         }
 
-        public Roulettes GetById(string id)
+        public Roulette GetRouletteById(string id)
         {
-            return _roulettesCollection.Find<Roulettes>(roulette => roulette.Id == id).FirstOrDefault();
+            return _roulettesCollection.Find<Roulette>(roulette => roulette.Id == id).FirstOrDefault();
         }
 
-        public Roulettes Create(Roulettes roulette)
+        public Roulette CreateRoulette(Roulette roulette)
         {
             _roulettesCollection.InsertOne(roulette);
             return roulette;
         }
 
-        public void Update(string id, Roulettes roulette)
+        public void UpdateRoulette(string id, Roulette roulette)
         {
             _roulettesCollection.ReplaceOne(roulette => roulette.Id == id, roulette);
         }
 
-        public void Delete(Roulettes roulette)
+        public void DeleteRoulette(Roulette roulette)
         {
             _roulettesCollection.DeleteOne(roulette => roulette.Id == roulette.Id);
         }
 
-        public void DeleteById(string id)
+        public void DeleteRouletteById(string id)
         {
             _roulettesCollection.DeleteOne(roulette => roulette.Id == id);
         }

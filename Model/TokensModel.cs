@@ -11,43 +11,33 @@ namespace bettingRouletteAPI.Model
     public class TokensModel
     {
 
-        private readonly IMongoCollection<Tokens> _tokensCollection;
+        private readonly IMongoCollection<Token> _tokensCollection;
 
         public TokensModel(IRouletteDatabaseSettings settings)
         {
             var dbClient = new MongoClient(settings.ConnectionString);
             var database = dbClient.GetDatabase(settings.DatabaseName);
 
-            _tokensCollection = database.GetCollection<Tokens>(settings.TokensCollectionName);
+            _tokensCollection = database.GetCollection<Token>(settings.TokensCollectionName);
         }
 
-        public List<Tokens> Get()
+        public Token GetTokenByStringToken(string value)
         {
-            return _tokensCollection.Find(token => true).ToList();
+            return _tokensCollection.Find<Token>(token => token.StringToken == value).FirstOrDefault();
         }
 
-        public Tokens GetById(string id)
-        {
-            return _tokensCollection.Find<Tokens>(token => token.Id == id).FirstOrDefault();
-        }
-
-        public Tokens Create(Tokens token)
+        public Token CreateToken(Token token)
         {
             _tokensCollection.InsertOne(token);
             return token;
         }
 
-        public void Update(string id, Tokens token)
-        {
-            _tokensCollection.ReplaceOne(token => token.Id == id, token);
-        }
-
-        public void Delete(Tokens token)
+        public void DeleteToken(Token token)
         {
             _tokensCollection.DeleteOne(token => token.Id == token.Id);
         }
 
-        public void DeleteById(string id)
+        public void DeleteTokenById(string id)
         {
             _tokensCollection.DeleteOne(token => token.Id == id);
         }

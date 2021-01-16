@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace bettingRouletteAPI.Entities
 {
-    public class Tokens
+    public class Roulette
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public string Token { get; set;}
+        public string Nombre { get; set; }
+        public string Status { get; set; }
     }
 }

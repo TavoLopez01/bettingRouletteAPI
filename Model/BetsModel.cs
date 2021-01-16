@@ -11,43 +11,43 @@ namespace bettingRouletteAPI.Model
 {
     public class BetsModel
     {
-        private readonly IMongoCollection<Bets> _betsCollection;
+        private readonly IMongoCollection<Bet> _betsCollection;
         
         public BetsModel(IRouletteDatabaseSettings settings)
         {
             var dbClient = new MongoClient(settings.ConnectionString);
             var database = dbClient.GetDatabase(settings.DatabaseName);
 
-            _betsCollection = database.GetCollection<Bets>(settings.BetsCollectionName);
+            _betsCollection = database.GetCollection<Bet>(settings.BetsCollectionName);
         }
 
-        public List<Bets> Get()
+        public List<Bet> GetBet()
         {
             return _betsCollection.Find(bet => true).ToList();
         }
 
-        public Bets GetById(string id)
+        public Bet GetBetById(string id)
         {
-            return _betsCollection.Find<Bets>(bet => bet.Id == id).FirstOrDefault();
+            return _betsCollection.Find<Bet>(bet => bet.Id == id).FirstOrDefault();
         }
 
-        public Bets Create(Bets bet)
+        public Bet CreateBet(Bet bet)
         {
             _betsCollection.InsertOne(bet);
             return bet;
         }
 
-        public void Update(string id, Bets bet)
+        public void UpdateBet(string id, Bet bet)
         {
             _betsCollection.ReplaceOne(bet => bet.Id == id, bet);
         }
 
-        public void Delete(Bets bet)
+        public void DeleteBet(Bet bet)
         {
             _betsCollection.DeleteOne(bet => bet.Id == bet.Id);
         }
 
-        public void DeleteById(string id)
+        public void DeleteBetById(string id)
         {
             _betsCollection.DeleteOne(bet => bet.Id == id);
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace bettingRouletteAPI.Entities
 {
-    public class Bets
+    public class Bet
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -15,6 +15,6 @@ namespace bettingRouletteAPI.Entities
         public string Id_Roulette { get; set; }
         public string Type_Bet { get; set; }
         public string Value_Bet { get; set; }
-        public string Bet_Amount { get; set; }
+        public int Bet_Amount { get; set; }
     }
 }
