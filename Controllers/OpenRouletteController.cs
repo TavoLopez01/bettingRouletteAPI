@@ -1,7 +1,7 @@
-﻿using bettingRouletteAPI.Helpers.Results;
+﻿using bettingRouletteAPI.Helpers;
+using bettingRouletteAPI.Helpers.Results;
 using bettingRouletteAPI.Model;
 using Microsoft.AspNetCore.Mvc;
-
 namespace bettingRouletteAPI.Controllers
 {
     [Route("api/openRoulette")]
@@ -9,11 +9,12 @@ namespace bettingRouletteAPI.Controllers
     public class OpenRouletteController : ControllerBase
     {
         private readonly RoulettesModel _rouletteModel;
+        private readonly GlobalFunctions _globalFunctions;
         public OpenRouletteController(RoulettesModel rouleteModel)
         {
             _rouletteModel = rouleteModel;
+            _globalFunctions = new GlobalFunctions();
         }
-
         [HttpPut("{idRoulette}")]
         public IActionResult UpdateRoulette(string idRoulette)
         {
@@ -27,6 +28,7 @@ namespace bettingRouletteAPI.Controllers
                     return Ok(errorMessageResult);
                 }
                 roulette.Status = "Open";
+                roulette.OpenedDate = _globalFunctions.GetDateFromFormat("o");
                 _rouletteModel.UpdateRoulette(idRoulette, roulette);
                 var successMessageResult = new SuccessMessageResult();
                 successMessageResult.Success = "Successful operation";

@@ -3,6 +3,5 @@
     public class NewRouletteResult
     {
         public string IdRoulette { get; set; }
-        
     }
 }

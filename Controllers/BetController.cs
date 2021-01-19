@@ -3,7 +3,7 @@ using bettingRouletteAPI.Helpers.Results;
 using bettingRouletteAPI.Helpers.Validations;
 using bettingRouletteAPI.Model;
 using Microsoft.AspNetCore.Mvc;
-
+using System;
 namespace bettingRouletteAPI.Controllers
 {
     [Route("api/createBet")]
@@ -16,7 +16,6 @@ namespace bettingRouletteAPI.Controllers
         private readonly Validations _validations;
         private readonly SuccessMessageResult _successMessageResult;
         private readonly ErrorMessageResult _errorMessageResult;
-
         public BetController(BetsModel betsModel, TokensModel tokensModel, RoulettesModel roulettesModel)
         {
             _betsModel = betsModel;
@@ -26,7 +25,6 @@ namespace bettingRouletteAPI.Controllers
             _successMessageResult = new SuccessMessageResult();
             _errorMessageResult = new ErrorMessageResult();
         }
-
         [HttpPost]
         public IActionResult CreateBet(Bet bet)
         {
@@ -40,6 +38,7 @@ namespace bettingRouletteAPI.Controllers
                     var resultValidateBet = _validations.ValidateBet(bet, _roulettesModel);
                     if (resultValidateBet.Status)
                     {
+                        bet.CreatedAt = DateTime.Now;
                         _betsModel.CreateBet(bet);
                         _successMessageResult.Success = "Bet created correctly";
 

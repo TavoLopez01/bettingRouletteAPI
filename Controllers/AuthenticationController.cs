@@ -3,7 +3,6 @@ using bettingRouletteAPI.Helpers.Results;
 using bettingRouletteAPI.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
-
 namespace bettingRouletteAPI.Controllers
 {
     [Route("api/authentication")]
@@ -15,7 +14,6 @@ namespace bettingRouletteAPI.Controllers
         {
             _tokenModel = tokenModel;
         }
-
         [HttpPost]
         public IActionResult CreateToken()
         {
@@ -27,6 +25,5 @@ namespace bettingRouletteAPI.Controllers
 
             return Ok(authenticationResult);
         }
-
     }
 }

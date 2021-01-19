@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using System;
 
 namespace bettingRouletteAPI.Entities
 {
@@ -12,5 +13,7 @@ namespace bettingRouletteAPI.Entities
         public string Type_Bet { get; set; }
         public string Value_Bet { get; set; }
         public int Bet_Amount { get; set; }
+        [BsonDateTimeOptions]
+        public DateTime CreatedAt { get; set; }
     }
 }

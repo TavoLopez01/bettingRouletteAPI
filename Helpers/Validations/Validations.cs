@@ -4,7 +4,6 @@ using bettingRouletteAPI.Model;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
-
 namespace bettingRouletteAPI.Helpers.Validations
 {
     public class Validations
@@ -22,14 +21,12 @@ namespace bettingRouletteAPI.Helpers.Validations
                 }
             }
             if (tokenString != "") {
-
                 var token = tokensModel.GetTokenByStringToken(tokenString);
                 response = (token != null) ? "Ok" : ""; 
             }
 
             return response;
         }
-
         public ResultValidationBet ValidateBet(Bet bet, RoulettesModel rouletteModel)
         {
             var resultValidationBet = new ResultValidationBet();
@@ -66,7 +63,6 @@ namespace bettingRouletteAPI.Helpers.Validations
 
             return resultValidationBet;
         }
-
         public ResultValidationBet ValidateBetAmount(int amount)
         {
             var resultValidationBet = new ResultValidationBet();
@@ -84,7 +80,6 @@ namespace bettingRouletteAPI.Helpers.Validations
 
             return resultValidationBet;
         }
-
         public ResultValidationBet ValidateIfExistRouletteOpen(Bet bet, RoulettesModel rouletteModel)
         {
             var resultValidationBet = new ResultValidationBet();
@@ -117,7 +112,6 @@ namespace bettingRouletteAPI.Helpers.Validations
 
             return resultValidationBet;
         }
-
         public ResultValidationBet ValidateTypeBet(Bet bet)
         {
             var resultValidationBet = new ResultValidationBet();
