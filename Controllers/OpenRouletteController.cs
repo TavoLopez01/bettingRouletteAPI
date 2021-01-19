@@ -2,6 +2,7 @@
 using bettingRouletteAPI.Helpers.Results;
 using bettingRouletteAPI.Model;
 using Microsoft.AspNetCore.Mvc;
+
 namespace bettingRouletteAPI.Controllers
 {
     [Route("api/openRoulette")]
